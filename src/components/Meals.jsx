@@ -1,10 +1,27 @@
 import React from 'react';
-import { useGlobalContext } from '../store/context';
+import { useGlobalContext } from '../store';
 import { FiThumbsUp } from 'react-icons/fi';
 
 const Meals = () => {
-  const { meals } = useGlobalContext();
+  const { meals, isLoading } = useGlobalContext();
 
+  // Loading
+  if (isLoading) {
+    return (
+      <section className="section">
+        <h4>Loading Meals...</h4>
+      </section>
+    );
+  }
+
+  // if no meal is found
+  if (meals.length < 1) {
+    return (
+      <section className="section">
+        <h4>No Meal Item matched your search. Please try again</h4>
+      </section>
+    );
+  }
   return (
     <section className="section-center">
       {meals.map((meal) => {
