@@ -3,7 +3,8 @@ import { useGlobalContext } from '../store';
 import { FiThumbsUp } from 'react-icons/fi';
 
 const Meals = () => {
-  const { meals, isLoading } = useGlobalContext();
+  const { meals, isLoading, selectMealHandler, addToFavouriteHandler } =
+    useGlobalContext();
 
   // Loading
   if (isLoading) {
@@ -33,10 +34,14 @@ const Meals = () => {
               alt={image}
               style={{ width: '200px' }}
               className="img"
+              onClick={() => selectMealHandler(id)}
             />
             <footer>
               <h5>{title}</h5>
-              <button className="like-btn">
+              <button
+                className="like-btn"
+                onClick={() => addToFavouriteHandler(id)}
+              >
                 <FiThumbsUp />
               </button>
             </footer>
